@@ -109,6 +109,7 @@ public sealed class UnityFastToolsAnalyzer : DiagnosticAnalyzer
                 case AttributesDescription.UnityHandlerFull:
                     {
                         if (declaration.HasAccessor(SyntaxKind.GetAccessorDeclaration)) continue;
+                        if (declaration.ExpressionBody != null) continue;
                         
                         var identifier = declaration.Identifier;
                         var diagnostic = Diagnostic.Create(DiagnosticRules.UnityHandlerPropertyRule, identifier.GetLocation(), identifier.Text);
